@@ -29,6 +29,12 @@ public final class NewsUtility {
     public static List<News> fetchNewsData(String requestUrl) {
         URL url = createUrl(requestUrl);
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
@@ -116,7 +122,8 @@ public final class NewsUtility {
 
             for (int i = 0; i < newsArray.length(); i++) {
                 JSONObject currentNews = newsArray.getJSONObject(i);
-                String title = currentNews.getString("type");
+                String title = currentNews.getString("webTitle");
+
                 String author = currentNews.getString("sectionName");
                 String url = currentNews.getString("webUrl");
 
@@ -130,4 +137,6 @@ public final class NewsUtility {
 
         return newsArrayList;
     }
+
+
 }
