@@ -30,7 +30,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
         titleTextView.setText(title);
 
         TextView authorTextView = listItemView.findViewById(R.id.news_author);
-        String author = currentNews.getAuthor();
+        String author = currentNews.getNewsAuthor();
         authorTextView.setText(author);
 
 

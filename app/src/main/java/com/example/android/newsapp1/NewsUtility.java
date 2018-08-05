@@ -106,7 +106,7 @@ public final class NewsUtility {
         return output.toString();
     }
 
-    public static List<News> extractFeatureFromJson(String newsJSON) {
+    private static List<News> extractFeatureFromJson(String newsJSON) {
 
         if (TextUtils.isEmpty(newsJSON)) {
             return null;
@@ -122,9 +122,8 @@ public final class NewsUtility {
 
             for (int i = 0; i < newsArray.length(); i++) {
                 JSONObject currentNews = newsArray.getJSONObject(i);
-                String title = currentNews.getString("webTitle");
-
-                String author = currentNews.getString("sectionName");
+                String title = currentNews.getString("sectionName");
+                String author = currentNews.getString("webTitle");
                 String url = currentNews.getString("webUrl");
 
                 News news = new News(title, author, url);
