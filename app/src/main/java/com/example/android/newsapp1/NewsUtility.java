@@ -124,16 +124,23 @@ public final class NewsUtility {
                 section = currentNews.getString("sectionName");
                 title = currentNews.getString("webTitle");
                 url = currentNews.getString("webUrl");
-                date = currentNews.getString("webPublicationDate");
-                date = date.replaceAll("[T,Z]", " ");
+                try {
+                    date = currentNews.getString("webPublicationDate");
+                    date = date.replaceAll("[T,Z]", " ");
+                } catch (Exception e) {
+                    date = null;
+                }
 
                 JSONObject fields = currentNews.getJSONObject("fields");
                 trailText = fields.getString("trailText");
 
                 JSONArray tags = currentNews.getJSONArray("tags");
-                JSONObject object = tags.getJSONObject(0);
-                author = object.getString("webTitle");
-
+                try {
+                    JSONObject object = tags.getJSONObject(0);
+                    author = object.getString("webTitle");
+                } catch (Exception e) {
+                    author = null;
+                }
                 News news = new News(section, title, author, url, date, trailText);
                 newsArrayList.add(news);
             }
