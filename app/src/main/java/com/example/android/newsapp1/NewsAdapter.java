@@ -11,7 +11,7 @@ import java.util.List;
 
 public class NewsAdapter extends ArrayAdapter<News> {
 
-    public NewsAdapter(Context context, List<News> news) {
+    NewsAdapter(Context context, List<News> news) {
         super(context, 0, news);
     }
 
@@ -26,13 +26,24 @@ public class NewsAdapter extends ArrayAdapter<News> {
         News currentNews = getItem(position);
 
         TextView titleTextView = listItemView.findViewById(R.id.news_title);
-        String title = currentNews.getNewsTitle();
+        String title = currentNews.getTitle();
         titleTextView.setText(title);
 
+        TextView contentTextView = listItemView.findViewById(R.id.news_trail_text);
+        String trailText = currentNews.getTrailText();
+        contentTextView.setText(trailText);
+
+        TextView sectionTextView = listItemView.findViewById(R.id.news_section);
+        String section = currentNews.getSection();
+        sectionTextView.setText(section);
+
         TextView authorTextView = listItemView.findViewById(R.id.news_author);
-        String author = currentNews.getNewsAuthor();
+        String author = currentNews.getAuthor();
         authorTextView.setText(author);
 
+        TextView dateTextView = listItemView.findViewById(R.id.news_date);
+        String date = currentNews.getDate();
+        dateTextView.setText(date);
 
         return listItemView;
     }

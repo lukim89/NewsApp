@@ -20,10 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderCallbacks<List<News>> {
 
-    public static final String LOG_TAG = MainActivity.class.getName();
-    private static final String USGS_REQUEST_URL =
-            "https://content.guardianapis.com/search?&show-tags=contributor&api-key=e6b96746-0297-491e-bbe1-cbccaaa275c4";
-
+    private static final String USGS_REQUEST_URL = "https://content.guardianapis.com/search?show-elements=all&show-fields=trailText&show-tags=contributor&api-key=e6b96746-0297-491e-bbe1-cbccaaa275c4";
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter mAdapter;
     private TextView mEmptyStateTextView;
@@ -33,9 +30,8 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        ListView newsListView = (ListView) findViewById(R.id.list);
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        ListView newsListView = findViewById(R.id.list);
+        mEmptyStateTextView = findViewById(R.id.empty_view);
         newsListView.setEmptyView(mEmptyStateTextView);
         mAdapter = new NewsAdapter(this, new ArrayList<News>());
         newsListView.setAdapter(mAdapter);

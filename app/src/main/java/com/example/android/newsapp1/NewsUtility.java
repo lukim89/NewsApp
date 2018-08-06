@@ -18,7 +18,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public final class NewsUtility {
 
     private static final String LOG_TAG = NewsUtility.class.getSimpleName();
@@ -52,7 +51,7 @@ public final class NewsUtility {
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
-            Log.e(LOG_TAG, "Problem building the URL ", e);
+            Log.e(LOG_TAG, "Problem building the URL.", e);
         }
         return url;
     }
@@ -68,8 +67,8 @@ public final class NewsUtility {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(10000);
+            urlConnection.setConnectTimeout(15000);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
@@ -112,21 +111,30 @@ public final class NewsUtility {
             return null;
         }
 
+        String section, title, author, url, date, trailText;
         List<News> newsArrayList = new ArrayList<>();
 
         try {
-
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
             JSONObject response = baseJsonResponse.getJSONObject("response");
             JSONArray newsArray = response.getJSONArray("results");
 
             for (int i = 0; i < newsArray.length(); i++) {
                 JSONObject currentNews = newsArray.getJSONObject(i);
-                String title = currentNews.getString("sectionName");
-                String author = currentNews.getString("webTitle");
-                String url = currentNews.getString("webUrl");
+                section = currentNews.getString("sectionName");
+                title = currentNews.getString("webTitle");
+                url = currentNews.getString("webUrl");
+                date = currentNews.getString("webPublicationDate");
+                date = date.replaceAll("[T,Z]", " ");
 
-                News news = new News(title, author, url);
+                JSONObject fields = currentNews.getJSONObject("fields");
+                trailText = fields.getString("trailText");
+
+                JSONArray tags = currentNews.getJSONArray("tags");
+                JSONObject object = tags.getJSONObject(0);
+                author = object.getString("webTitle");
+
+                News news = new News(section, title, author, url, date, trailText);
                 newsArrayList.add(news);
             }
 
@@ -136,6 +144,4 @@ public final class NewsUtility {
 
         return newsArrayList;
     }
-
-
 }

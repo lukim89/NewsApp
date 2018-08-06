@@ -2,29 +2,43 @@ package com.example.android.newsapp1;
 
 public class News {
 
-    private String mNewsTitle;
-    private String mNewsAuthor;
+    private String mSection;
+    private String mTitle;
+    private String mAuthor;
     private String mUrl;
+    private String mTrailText;
+    private String mDate;
 
-    public News(String newsTitle, String author, String url) {
-        mNewsTitle = newsTitle;
-        mNewsAuthor = author;
+    public News(String section, String newsTitle, String author, String url, String date, String trailText) {
+        mSection = section;
+        mTitle = newsTitle;
+        mAuthor = author;
         mUrl = url;
+        mDate = date;
+        mTrailText = trailText;
     }
 
-    public String getNewsTitle() {
-        return mNewsTitle;
+    public String getSection() {
+        return mSection;
     }
 
-    public String getNewsAuthor() {
-        return mNewsAuthor;
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public String getAuthor() {
+        return mAuthor;
     }
 
     public String getUrl() {
         return mUrl;
     }
 
+    public String getDate() {
+        return mDate;
+    }
+
+    public String getTrailText() {
+        return mTrailText;
+    }
 }
-
-
-
