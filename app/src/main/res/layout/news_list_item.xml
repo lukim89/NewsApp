@@ -15,7 +15,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -33,6 +33,12 @@
             android:textSize="20sp"
             android:textStyle="bold"
             tools:text="News Title" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/news_thumbnail"
+            tools:src="@drawable/ic_launcher_background"/>
 
         <TextView
             android:id="@+id/news_trail_text"

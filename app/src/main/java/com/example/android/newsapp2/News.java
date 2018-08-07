@@ -8,14 +8,16 @@ public class News {
     private String mUrl;
     private String mTrailText;
     private String mDate;
+    private String mThumbnail;
 
-    public News(String section, String newsTitle, String author, String url, String date, String trailText) {
+    public News(String section, String newsTitle, String author, String url, String date, String trailText, String thumbnail) {
         mSection = section;
         mTitle = newsTitle;
         mAuthor = author;
         mUrl = url;
         mDate = date;
         mTrailText = trailText;
+        mThumbnail = thumbnail;
     }
 
     public String getSection() {
@@ -41,4 +43,9 @@ public class News {
     public String getTrailText() {
         return mTrailText;
     }
+
+    public String getThumbnail() {
+        return mThumbnail;
+    }
+
 }

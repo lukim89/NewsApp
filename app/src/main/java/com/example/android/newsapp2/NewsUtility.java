@@ -111,7 +111,7 @@ public final class NewsUtility {
             return null;
         }
 
-        String section, title, author, url, date, trailText;
+        String section, title, author, url, date, trailText, thumbnail;
         List<News> newsArrayList = new ArrayList<>();
 
         try {
@@ -133,6 +133,7 @@ public final class NewsUtility {
 
                 JSONObject fields = currentNews.getJSONObject("fields");
                 trailText = fields.getString("trailText");
+                thumbnail = fields.getString("thumbnail");
 
                 JSONArray tags = currentNews.getJSONArray("tags");
                 try {
@@ -141,7 +142,7 @@ public final class NewsUtility {
                 } catch (Exception e) {
                     author = null;
                 }
-                News news = new News(section, title, author, url, date, trailText);
+                News news = new News(section, title, author, url, date, trailText, thumbnail);
                 newsArrayList.add(news);
             }
 
