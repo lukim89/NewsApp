@@ -10,18 +10,9 @@
         android:title="@string/settings_page_size_label" />
 
     <CheckBoxPreference
-        android:key="@string/settings_show_thumbnails_key"
-        android:title="@string/settings_show_thumbnails_label"
-        android:summary="Show thumbnails?"
         android:defaultValue="@string/settings_show_thumbnails_default"
-        />
-
-    <EditTextPreference
-        android:defaultValue="@string/settings_page_default"
-        android:inputType="number"
-        android:key="@string/settings_page_key"
-        android:selectAllOnFocus="true"
-        android:title="@string/settings_page_label" />
+        android:key="@string/settings_show_thumbnails_key"
+        android:title="@string/settings_show_thumbnails_label" />
 
     <ListPreference
         android:defaultValue="@string/settings_order_by_default"

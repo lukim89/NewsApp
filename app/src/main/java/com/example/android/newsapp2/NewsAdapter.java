@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 public class NewsAdapter extends ArrayAdapter<News> {
@@ -45,11 +46,14 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         ImageView thumbnailImageView = listItemView.findViewById(R.id.news_thumbnail);
         if (mThumbnails) {
-            String thumbnail = currentNews.getThumbnail();
-            new DownloadImageTask(thumbnailImageView)
-                    .execute(thumbnail);
+            if (!(currentNews.getThumbnail() == null)) {
+                thumbnailImageView.setVisibility(View.VISIBLE);
+                String thumbnail = currentNews.getThumbnail();
+                new DownloadImageTask(thumbnailImageView)
+                        .execute(thumbnail);
+            }
         } else {
-          thumbnailImageView.setVisibility(View.GONE);
+            thumbnailImageView.setVisibility(View.GONE);
         }
 
         TextView contentTextView = listItemView.findViewById(R.id.news_trail_text);
@@ -83,8 +87,8 @@ public class NewsAdapter extends ArrayAdapter<News> {
             String url = urls[0];
             Bitmap bitmap = null;
             try {
-                InputStream in = new java.net.URL(url).openStream();
-                bitmap = BitmapFactory.decodeStream(in);
+                InputStream inputStream = new URL(url).openStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
             } catch (Exception e) {
                 Log.e("Error no image", e.getMessage());
                 e.printStackTrace();
@@ -92,10 +96,10 @@ public class NewsAdapter extends ArrayAdapter<News> {
             return bitmap;
         }
 
-        protected void onPostExecute(Bitmap result) {
+        protected void onPostExecute(Bitmap downloadedBitmap) {
             mImageView.setAdjustViewBounds(true);
             mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            mImageView.setImageBitmap(result);
+            mImageView.setImageBitmap(downloadedBitmap);
         }
     }
 

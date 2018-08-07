@@ -26,21 +26,6 @@ public class SettingsActivity extends AppCompatActivity {
             Preference pageSize = findPreference(getString(R.string.settings_page_size_key));
             bindPreferenceSummaryToValue(pageSize);
 
-            Preference showThumbnails = findPreference(getString(R.string.settings_show_thumbnails_key));
-
-            showThumbnails.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().equals("true")) {
-                    } else {
-                    }
-                    return true;
-                }
-            });
-
-
-            Preference page = findPreference(getString(R.string.settings_page_key));
-            bindPreferenceSummaryToValue(page);
-
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderBy);
         }

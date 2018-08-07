@@ -16,7 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter mAdapter;
     private TextView mEmptyStateTextView;
-
-
+    private int pageNumber = 1;
+    private String page = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +39,18 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         setContentView(R.layout.activity_main);
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean thumbnails = sharedPrefs.getBoolean(getString(R.string.settings_show_thumbnails_key), false);
+        boolean thumbnails = sharedPrefs.getBoolean(getString(R.string.settings_show_thumbnails_key), true);
 
         ListView newsListView = findViewById(R.id.list);
+
         mEmptyStateTextView = findViewById(R.id.empty_view);
         newsListView.setEmptyView(mEmptyStateTextView);
+
         mAdapter = new NewsAdapter(this, new ArrayList<News>(), thumbnails);
         newsListView.setAdapter(mAdapter);
+
+        final TextView pageNumberTextView = findViewById(R.id.page_number);
+        pageNumberTextView.setText(page);
 
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,6 +62,34 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
             }
         });
 
+        final ProgressBar loadingIndicator = findViewById(R.id.loading_indicator);
+
+        Button next = findViewById(R.id.button_next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadingIndicator.setVisibility(View.VISIBLE);
+                pageNumber = pageNumber + 1;
+                page = String.valueOf(pageNumber);
+                getLoaderManager().restartLoader(NEWS_LOADER_ID, null, MainActivity.this);
+                pageNumberTextView.setText(page);
+            }
+        });
+
+        Button previous = findViewById(R.id.button_previous);
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (pageNumber > 1) {
+                    loadingIndicator.setVisibility(View.VISIBLE);
+                    pageNumber = pageNumber - 1;
+                    page = String.valueOf(pageNumber);
+                    getLoaderManager().restartLoader(NEWS_LOADER_ID, null, MainActivity.this);
+                    pageNumberTextView.setText(page);
+                }
+            }
+        });
+
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -63,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
         } else {
-            View loadingIndicator = findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
@@ -76,10 +110,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         String pageSize = sharedPrefs.getString(
                 getString(R.string.settings_page_size_key),
                 getString(R.string.settings_page_size_default));
-
-        String page = sharedPrefs.getString(
-                getString(R.string.settings_page_key),
-                getString(R.string.settings_page_default));
 
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
@@ -95,8 +125,6 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         uriBuilder.appendQueryParameter("show-fields", "trailText,thumbnail");
         uriBuilder.appendQueryParameter("page-size", pageSize);
         uriBuilder.appendQueryParameter("page", page);
-
-
 
         return new NewsLoader(this, uriBuilder.toString());
     }

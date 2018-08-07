@@ -133,8 +133,11 @@ public final class NewsUtility {
 
                 JSONObject fields = currentNews.getJSONObject("fields");
                 trailText = fields.getString("trailText");
-                thumbnail = fields.getString("thumbnail");
-
+                try {
+                    thumbnail = fields.getString("thumbnail");
+                } catch (Exception e) {
+                    thumbnail = null;
+                }
                 JSONArray tags = currentNews.getJSONArray("tags");
                 try {
                     JSONObject object = tags.getJSONObject(0);
