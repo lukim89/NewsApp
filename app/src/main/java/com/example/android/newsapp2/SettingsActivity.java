@@ -11,9 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
-    protected  void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R. layout.settings_activity);
+        setContentView(R.layout.settings_activity);
     }
 
     public static class NewsPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
@@ -25,6 +25,18 @@ public class SettingsActivity extends AppCompatActivity {
 
             Preference pageSize = findPreference(getString(R.string.settings_page_size_key));
             bindPreferenceSummaryToValue(pageSize);
+
+            Preference showThumbnails = findPreference(getString(R.string.settings_show_thumbnails_key));
+
+            showThumbnails.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue.toString().equals("true")) {
+                    } else {
+                    }
+                    return true;
+                }
+            });
+
 
             Preference page = findPreference(getString(R.string.settings_page_key));
             bindPreferenceSummaryToValue(page);
@@ -39,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (preference instanceof ListPreference) {
                 ListPreference listPreference = (ListPreference) preference;
                 int prefIndex = listPreference.findIndexOfValue(stringValue);
-                if (prefIndex >=0) {
+                if (prefIndex >= 0) {
                     CharSequence[] labels = listPreference.getEntries();
                     preference.setSummary(labels[prefIndex]);
                 }
@@ -52,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
         private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
-            String preferenceString = preferences.getString(preference.getKey(),"");
+            String preferenceString = preferences.getString(preference.getKey(), "");
             onPreferenceChange(preference, preferenceString);
         }
     }

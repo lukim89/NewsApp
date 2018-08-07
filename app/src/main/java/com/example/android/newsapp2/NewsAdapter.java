@@ -3,7 +3,6 @@ package com.example.android.newsapp2;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -14,16 +13,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 public class NewsAdapter extends ArrayAdapter<News> {
 
-    NewsAdapter(Context context, List<News> news) {
+    private boolean mThumbnails;
+
+    NewsAdapter(Context context, List<News> news, boolean thumbnails) {
         super(context, 0, news);
+        mThumbnails = thumbnails;
     }
 
     @Override
@@ -45,9 +44,13 @@ public class NewsAdapter extends ArrayAdapter<News> {
         titleTextView.setText(title);
 
         ImageView thumbnailImageView = listItemView.findViewById(R.id.news_thumbnail);
-        String thumbnail = currentNews.getThumbnail();
-        new DownloadImageTask(thumbnailImageView)
-                .execute(thumbnail);
+        if (mThumbnails) {
+            String thumbnail = currentNews.getThumbnail();
+            new DownloadImageTask(thumbnailImageView)
+                    .execute(thumbnail);
+        } else {
+          thumbnailImageView.setVisibility(View.GONE);
+        }
 
         TextView contentTextView = listItemView.findViewById(R.id.news_trail_text);
         String trailText = currentNews.getTrailText();

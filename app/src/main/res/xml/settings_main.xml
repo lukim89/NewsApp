@@ -2,12 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
 
-    <EditTextPreference
+    <ListPreference
         android:defaultValue="@string/settings_page_size_default"
-        android:inputType="numberDecimal"
+        android:entries="@array/settings_page_size_labels"
+        android:entryValues="@array/settings_page_size_values"
         android:key="@string/settings_page_size_key"
-        android:selectAllOnFocus="true"
         android:title="@string/settings_page_size_label" />
+
+    <CheckBoxPreference
+        android:key="@string/settings_show_thumbnails_key"
+        android:title="@string/settings_show_thumbnails_label"
+        android:summary="Show thumbnails?"
+        android:defaultValue="@string/settings_show_thumbnails_default"
+        />
 
     <EditTextPreference
         android:defaultValue="@string/settings_page_default"

@@ -6,10 +6,21 @@
     <string name="settings_menu_item">Settings</string>
     <string name="settings_title">News Settings</string>
 
-    <string name="settings_page_size_label">Number of news.</string>
+    <!-- Strings For Page Size Preference [CHAR LIMIT=30] -->
+    <string name="settings_page_size_label">Number of news on page.</string>
     <string name="settings_page_size_key" translatable="false">page_size</string>
     <string name="settings_page_size_default" translatable="false">10</string>
 
+    <string name="settings_page_size_5_label">5</string>
+    <string name="settings_page_size_5_value" translatable="false">5</string>
+    <string name="settings_page_size_10_label">10</string>
+    <string name="settings_page_size_10_value" translatable="false">10</string>
+    <string name="settings_page_size_25_label">25</string>
+    <string name="settings_page_size_25_value" translatable="false">25</string>
+    <string name="settings_page_size_50_label">50</string>
+    <string name="settings_page_size_50_value" translatable="false">50</string>
+
+    <!-- Strings for page number option.-->
     <string name="settings_page_label">Page</string>
     <string name="settings_page_key" translatable="false">page</string>
     <string name="settings_page_default" translatable="false">1</string>
@@ -18,12 +29,15 @@
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>
     <string name="settings_order_by_default" translatable="false">@string/settings_order_by_newest_value</string>
-
     <!-- Label for order-by newest option [CHAR LIMIT=20] -->
     <string name="settings_order_by_newest_label">Newest</string>
     <string name="settings_order_by_newest_value" translatable="false">newest</string>
-
     <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
     <string name="settings_order_by_oldest_label">Oldest</string>
     <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
+
+    <!-- Strings for thumbnails show option.-->
+    <string name="settings_show_thumbnails_label">Show thumbnails.</string>
+    <string name="settings_show_thumbnails_key" translatable="false">showThumbnails</string>
+    <string name="settings_show_thumbnails_default" translatable="false">true</string>
 </resources>

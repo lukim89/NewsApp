@@ -29,15 +29,20 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     private NewsAdapter mAdapter;
     private TextView mEmptyStateTextView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean thumbnails = sharedPrefs.getBoolean(getString(R.string.settings_show_thumbnails_key), false);
+
         ListView newsListView = findViewById(R.id.list);
         mEmptyStateTextView = findViewById(R.id.empty_view);
         newsListView.setEmptyView(mEmptyStateTextView);
-        mAdapter = new NewsAdapter(this, new ArrayList<News>());
+        mAdapter = new NewsAdapter(this, new ArrayList<News>(), thumbnails);
         newsListView.setAdapter(mAdapter);
 
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
