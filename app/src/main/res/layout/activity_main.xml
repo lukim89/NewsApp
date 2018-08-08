@@ -9,19 +9,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/news_list_view"
+        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipe_to_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@id/buttons"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            tools:context=".MainActivity" />
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/news_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/buttons_layout"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryDark"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                tools:context=".MainActivity" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <LinearLayout
-            android:id="@+id/buttons"
+            android:id="@+id/buttons_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -29,32 +36,30 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_previous"
+                android:id="@+id/back_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_weight="3"
                 android:background="@color/colorPrimaryLight"
-                android:text="prev" />
+                android:text="@string/back_button" />
 
             <TextView
-                android:id="@+id/page_number"
+                android:id="@+id/page_number_text_view"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button_next"
+                android:id="@+id/next_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_weight="3"
                 android:background="@color/colorPrimaryLight"
-                android:text="next" />
-
+                android:text="@string/next_button" />
         </LinearLayout>
     </LinearLayout>
 
@@ -64,8 +69,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryLight"
         android:gravity="center"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textSize="24sp" />
+        android:textAppearance="?android:textAppearanceMedium" />
 
     <ProgressBar
         android:id="@+id/loading_indicator"
@@ -73,5 +77,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
-
 </RelativeLayout>

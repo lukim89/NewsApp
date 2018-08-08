@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">NewsApp2</string>
-    <string name="no_news">No News! Try to refresh.</string>
+    <string name="no_news_message">No News! Try to refresh.</string>
     <string name="no_internet_connection">No internet connection!</string>
+    <string name="next_button">next</string>
+    <string name="back_button">back</string>
 
     <string name="settings_menu_item">Settings</string>
     <string name="settings_title">News Settings</string>
@@ -35,4 +37,5 @@
     <string name="settings_show_thumbnails_label">Show thumbnails.</string>
     <string name="settings_show_thumbnails_key" translatable="false">show_thumbnails</string>
     <string name="settings_show_thumbnails_default" translatable="false">true</string>
+
 </resources>
