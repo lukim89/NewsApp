@@ -28,23 +28,23 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.news_list_item, parent, false);
         }
 
+        View listItemView = convertView;
         News currentNews = getItem(position);
 
-        TextView sectionTextView = listItemView.findViewById(R.id.news_section);
+        TextView sectionTextView = listItemView.findViewById(R.id.news_section_text_view);
         String section = currentNews.getSection();
         sectionTextView.setText(section);
 
-        TextView titleTextView = listItemView.findViewById(R.id.news_title);
+        TextView titleTextView = listItemView.findViewById(R.id.news_title_text_view);
         String title = currentNews.getTitle();
         titleTextView.setText(title);
 
-        ImageView thumbnailImageView = listItemView.findViewById(R.id.news_thumbnail);
+        ImageView thumbnailImageView = listItemView.findViewById(R.id.news_thumbnail_image_view);
         if (mThumbnails) {
             if (!(currentNews.getThumbnail() == null)) {
                 thumbnailImageView.setVisibility(View.VISIBLE);
@@ -56,18 +56,17 @@ public class NewsAdapter extends ArrayAdapter<News> {
             thumbnailImageView.setVisibility(View.GONE);
         }
 
-        TextView contentTextView = listItemView.findViewById(R.id.news_trail_text);
+        TextView contentTextView = listItemView.findViewById(R.id.news_trail_text_view);
         String trailText = currentNews.getTrailText();
         contentTextView.setText(stripHtml(trailText));
 
-
-        TextView authorTextView = listItemView.findViewById(R.id.news_author);
+        TextView authorTextView = listItemView.findViewById(R.id.news_author_text_view);
         if (!(currentNews.getAuthor() == null)) {
             String author = currentNews.getAuthor();
             authorTextView.setText(author);
         } else authorTextView.setVisibility(View.GONE);
 
-        TextView dateTextView = listItemView.findViewById(R.id.news_date);
+        TextView dateTextView = listItemView.findViewById(R.id.news_date_text_view);
         if (!(currentNews.getDate() == null)) {
             String date = currentNews.getDate();
             dateTextView.setText(date);

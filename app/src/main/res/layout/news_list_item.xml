@@ -19,14 +19,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/news_section"
+            android:id="@+id/news_section_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             tools:text="Section" />
 
         <TextView
-            android:id="@+id/news_title"
+            android:id="@+id/news_title_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="6dp"
@@ -37,11 +37,11 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/news_thumbnail"
+            android:id="@+id/news_thumbnail_image_view"
             tools:src="@drawable/ic_launcher_background"/>
 
         <TextView
-            android:id="@+id/news_trail_text"
+            android:id="@+id/news_trail_text_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -55,14 +55,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/news_author"
+                android:id="@+id/news_author_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 tools:text="News Author" />
 
             <TextView
-                android:id="@+id/news_date"
+                android:id="@+id/news_date_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
